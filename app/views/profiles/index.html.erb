@@ -1,0 +1,154 @@
+<nav class="navbar">
+
+  <div class="nav-img"><a href="/subjects"><img  src="<%= asset_path("vector.png") %>"></a></div>
+  <a class="nav-a" href="/subjects">Maze</a>
+
+
+</nav>
+</div>
+<div><% if member_signed_in? %>
+    <input  class="nav-input" type="text" placeholder="Search for something here..."> <img class="srch-img" src="<%= asset_path("Vector (9).png") %>">
+    <div class="user-div"><h6 class="user-details"><%= current_member.first_name%> <%= current_member.last_name%> </h6>
+      <div class="user-img-div"><img class="user-img" src="<%= asset_path("Rectangle 14 (1).png") %>"></div>
+    </div>
+  <%else %>
+    <input  class="nav-input" type="text" placeholder="Search for something here..."> <img class="srch-img" src="<%= asset_path("Vector (9).png") %>">
+    <div class="user-div"><h6 class="user-details"><%= current_member.first_name%> <%= current_member.last_name%> </h6>
+      <div class="user-img-div"><img class="user-img" src="<%= asset_path("Rectangle 14 (1).png") %>"></div>
+    </div>
+  <%end %>
+</div>
+
+
+<a href="#"><div class="opt-div1">
+  <img class="opt-div1-img" src="<%= asset_path("Vector (9.1).png") %>">
+  <p class="opt-div1-p">Feed </p>
+</div></a>
+
+<a href="/profiles/index"><div class="opt-div2">
+  <img class="opt-div2-img" src="<%= asset_path("Vector (9.2).png") %>">
+  <p class="opt-div2-p"><a>Profile</a></p>
+</div></a>
+
+<a<%= link_to '', destroy_member_session_path, method: :delete %><div class="opt-div2">
+  <img class="opt-div2-img" src="<%= asset_path("Vector (9.3).png") %>">
+  <p class="opt-div2-p">Logout</p>
+</div></a>
+
+
+<div class="main-div">
+
+
+  <div class="search-div">
+
+    <div>
+      <div class="fst-post-ipt-div">
+
+        <input class="fst-post-input" type="text" placeholder="Whats happening ? ">
+      </div>
+
+      <div class="upload-div">
+        <a class="upload-item" href=""> <img src="" alt=""><img class="upload-item-img"
+                                                                src="<%= asset_path("Vector (3).png") %>"> Live Video </a>
+
+        <a class="upload-item" href=""><img src="" alt=""><img class="upload-item-img" src="<%= asset_path("Vector (4).png") %>"> Photo/Video</a>
+        <a class="upload-item" href=""><img src="" alt=""><img class="upload-item-img" src="<%= asset_path("Vector (5).png") %>">Feeling</a>
+
+
+      </div>
+      <button class="upload-item-btn" type="submit">
+        <%= link_to "Post" , new_subject_path %>
+      </button>
+    </div>
+  </div>
+
+  <% @profile.each do |subject| %>
+    <div class="posts-div">
+
+      <div class="post-title">
+        <div class="post-heading showing-title">
+          <a class="h-6" href="/subjects/<%= subject.id %>">
+            <%= subject.title %>
+          </a>
+        </div>
+        <div class="post-heading">
+                        <span class="span-edit">
+                            <div class="dropdown">
+                                <button class="dropbtn">...
+
+                                </button>
+                                <div class="dropdown-content">
+                                    <a href="/subjects/<%= subject.id %>/edit">edit</a>
+                                  <%= link_to "Delete" , subject_path(subject), data: { turbo_method: :delete,
+                                                                                        turbo_confirm: "Are you sure?" } %>
+                                  <a href="/subjects/<%= subject.id %>">comments</a>
+                                </div>
+
+                            </div>
+                        </span>
+          <div class="post-time-div">
+            <%= (Date.today.to_date - subject.created_at.to_date).to_i %>Days
+            <% unless subject.archived? %>
+              <%= subject.status %>
+              </div>
+              </div>
+              </div>
+              <!--      <span class="post-time"><%#= link_to article.created_at, article %></span>-->
+              <div class="post-body">
+                <p class="post-body-p"><a class="h6-p" href="/subjects/<%= subject.id %>">
+                  <%= subject.body %>
+                </a></p>
+
+              </div>
+              <div class="like-comment-counts">
+                <p class="like-counts counts">
+                  <span><%= subject.likes.count %></span> Likes
+                </p>
+                <p class="comment-counts counts">
+                  <span><%= subject.comments.count %></span> Comments
+                </p>
+
+              </div>
+
+              <hr class="hr-for-comment">
+              <div class="for-like-comment for-comment-like">
+                <div class="for-like">
+                  <!--                    <img src="" alt="like">-->
+                  <!--          <form action="/likes" method="post">-->
+                  <!--            <input type="hidden" name="authenticity_token" value="<%#= form_authenticity_token %>">-->
+                  <!--            <input type="hidden" name="like[@article_id]" value="<%#= article.id %>">-->
+                  <!--            <input type="submit" value="like">-->
+                  <!--          </form>-->
+                  <%= button_to "like", likes_path, params: {like: {subject_id: subject.id}}, method: :post, class: "like-btn" %>
+                  <!--        <p><button class="like-btn"><img  src="<%#= asset_path("Vector (6).png") %>"></button><span class="like-logo">Like</span></p>-->
+                </div>
+
+
+                <div class="for-comment">
+                  <!--          <img src="" alt="comment">-->
+                  <p><a class="click-on-comment" href="/subjects/<%= subject.id %>"><img  src="<%= asset_path("Vector (7).png") %>"><span class="like-logo">Comment</span></a></p>
+                </div>
+              </div>
+              <hr class="hr-for-comment">
+
+              <div class="new-comment">
+                <div class="img-cmnt-btn1">
+                  <%= form_with model: [ subject, subject.comments.build ] do |form| %>
+                    <input class="put-comment" alt="comment" src="" type="text" placeholder="Write a comment" <%= form.text_area :body %>
+                    </div>
+                    <div class="upload-item-btn-1"><%= form.submit value="post" %>
+                      <!--            <a href="#"><img class="blue" src="<%#= asset_path("Rectangle 13.png") %>"> <img class="dark" src="<%#= asset_path("Vector (2).png") %>"></a>-->
+                    </div>
+                    </div>
+                  <% end %>
+
+
+
+                  </div>
+
+
+
+
+            <%end %>
+  <% end %>
+</div>

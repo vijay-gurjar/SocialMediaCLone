@@ -1,0 +1,162 @@
+
+<%= render 'members/userlayout' %>
+
+
+<div class="main-div-admin">
+
+
+
+  <div class="search-div">
+
+    <div>
+      <%= render "subjects/form", subject: @subject %>
+
+
+
+    </div>
+  </div>
+
+  <% @subject.each do |subject| %>
+    <div class="posts-div">
+
+      <div class="post-title">
+        <div class="post-heading showing-title">
+          <a class="h-6" href="/subjects/<%= subject.id %>"><img class="" src="<%= asset_path("vector.png") %>"><p>
+            <%= subject.title %></p>
+          </a>
+        </div>
+        <div class="post-heading">
+                        <span class="span-edit">
+                            <div class="dropdown">
+                                <button class="dropbtn">...
+
+                                </button>
+                                <div class="dropdown-content">
+                                    <a href="/subjects/<%= subject.id %>/edit">edit</a>
+                                  <%= link_to "Delete" , subject_path(subject), data: { turbo_method: :delete,
+                                                                                        turbo_confirm: "Are you sure?" } %>
+                                  <a href="/subjects/<%= subject.id %>">comments</a>
+                                </div>
+
+                            </div>
+                        </span>
+          <div class="post-time-div-admin">
+            <%= time_ago_in_words(subject.created_at)%>
+            <% unless subject.archived? %>.
+              <%= subject.status %>
+              </div>
+              </div>
+              </div>
+              <!--      <span class="post-time"><%#= link_to article.created_at, article %></span>-->
+              <div class="post-body">
+                <p class="post-body-p"><a class="h6-p" href="/subjects/<%= subject.id %>">
+                  <%= subject.body %>
+                </a></p>
+
+              </div>
+              <div class="like-comment-counts">
+                <p class="like-counts counts">
+                  <span><%= subject.likes.count %></span> Likes
+                </p>
+                <p class="like-cmnt-dot" >.</p>
+                <p class="comment-counts counts">
+                  <span><%= subject.comments.count %></span> Comments
+                </p>
+
+              </div>
+
+              <hr class="hr-for-comment">
+              <div class="for-like-comment for-comment-like">
+                <div class="for-like">
+                  <!--                    <img src="" alt="like">-->
+                  <!--                  <form action="/likes" method="post">-->
+                  <!--                    <input type="hidden" name="authenticity_token" value="<%#= form_authenticity_token %>">-->
+                  <!--                    <input type="hidden" name="like[subjects_id]" value="<%#= subject.id %>">-->
+                  <!--                    <input type="submit" value="like">-->
+                  <!--                  </form>-->
+
+                  <p><button class="like-btn"><img  src="<%= asset_path("Vector (6).png") %>"></button>
+
+                    <span class="like-logo"><%= button_to "like", likes_path, params: {like: {subject_id: subject.id}}, method: :post, class: "like-btn1" %></span>
+                  </p>
+                </div>
+
+
+                <div class="for-comment">
+                  <!--          <img src="" alt="comment">-->
+                  <p><a class="click-on-comment" href="/subjects/<%= subject.id %>"><img  src="<%= asset_path("Vector (7).png") %>"><span class="like-logo">Comment</span></a></p>
+                </div>
+              </div>
+              <hr class="hr-for-comment">
+
+              <div class="new-comment">
+                <div class="img-cmnt-btn1">
+                  <%= form_with model: [ subject, subject.comments.build ] do |form| %>
+                    <% if current_member %>
+                      <%= form.text_field :commenter, id: :subject_member_id, value: current_member.first_name, type: :hidden %>
+                    <% else %> <%= form.text_field :commenter, id: :subject_member_id, type: :hidden %>
+                    <%end %>
+                    <input class="put-comment" alt="comment" src="" type="text" placeholder="Write a comment" <%= form.text_area :body %>
+                    </div>
+                    <div class="upload-item-btn-1"><%= form.submit value="post" %>
+                      <!--            <a href="#"><img class="blue" src="<%#= asset_path("Rectangle 13.png") %>"> <img class="dark" src="<%#= asset_path("Vector (2).png") %>"></a>-->
+                    </div>
+                    </div>
+                    <div>
+                      <!--            <P class=""> <%#= Subject.find(subject.id).comments.last.body %> </P>-->
+                    </div>
+                  <% end %>
+
+
+
+                  </div>
+
+
+
+
+            <%end %>
+  <% end %>
+</div>
+
+</div>
+<div class="nav-users-div">
+  <!--    <img src="<%#= asset_path("vector.png") %>">-->
+  <!--    <a class="nav-users-div-a1"><%#= current_member.first_name%> <%#= current_member.last_name%></a>-->
+  <!--    <a class="nav-users-div-a2" ><%#= current_member.roles.pluck(:name) %></a>-->
+  <div>
+    <div class="active-user">
+      <p>Users List</p>
+      <img src="<%= asset_path("Group 16.png") %>">
+
+    </div>
+
+    <% @member.each do |m| %>
+
+      <% unless m.subjects.blank? %>
+        <div class="members-div">
+          <div class="members-div-1">
+            <img class="members-div-logo" src="<%= asset_path("Vector (9)12.png") %>">
+          </div>
+          <p><%=m.first_name %> <%=m.last_name %></p>
+
+        </div>
+
+      <% end %>
+    <%end %>
+    <%# @accounts.each do |user| %>
+    <%# unless user.articles.blank? %>
+    <!--        <div class="side-bar-box-right">-->
+    <!--          <img src="<%#=image_path("mazelogo.png") %>">-->
+    <!--          <p class="nill"><%#=user.firstname %> <%#=user.lastname %></p>-->
+    <!--        </div>-->
+    <%#end %>
+    <%#end %>
+  </div>
+</div>
+
+
+
+
+
+
+

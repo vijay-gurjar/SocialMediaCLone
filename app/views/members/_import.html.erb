@@ -1,0 +1,19 @@
+
+
+<div class="file-importing-main-div">
+  <div>
+  <%= form_tag import_members_url, multipart: true do %>
+    <p class="file-upload-para">
+      Upload File
+    </p>
+    <div class="file-upload-div">
+    <%= file_field_tag :file, class: "file-upload-tag" %>
+    </div>
+      </div>
+
+
+    <%= submit_tag "Upload File", class: "btn btn-primary file-import-btn"%>
+  <%end %>
+
+
+</div>

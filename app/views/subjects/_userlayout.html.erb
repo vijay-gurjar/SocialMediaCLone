@@ -1,0 +1,62 @@
+<nav class="admin-pannel-nav">
+  <div class="admin-nav-div-1">
+    <a href="/dashboard">
+      <img class="admin-nav-div-1-img" src="<%= asset_path("vector.png") %>"></a>
+    <a class="admin-nav-div-1-a" href="/dashboard" >Maze</a>
+  </div>
+
+
+  <div class="admin-nav-div-2">
+    <input class="admin-nav-div-2-input" placeholder="Search for something here...">
+  </div>
+
+  <div class="admin-nav-div-3">
+    <img class="admin-nav-div-3-img" src="<%= asset_path("Rectangle 14.png") %>">
+    <a class="admin-nav-div-3-a1"><%= current_member.first_name%> <%= current_member.last_name%></a>
+    <a class="admin-nav-div-3-a2"><%= current_member.roles.pluck(:name) %></a>
+  </div>
+
+</nav>
+<div class="dashboard-list-main-div" >
+
+  <a class="dashboard-list-1" href="/dashboard">
+    <div class="dashboard-list-1-div">
+      <img class="dashboard-list-1-img" src="<%= asset_path("pannel list 1.png") %>">
+      <p class="dashboard-list-1-p">Feed</p>
+    </div>
+  </a>
+
+  <a class="dashboard-list-1" href="">
+    <div class="dashboard-list-1-div">
+      <img class="dashboard-list-1-img" src="<%= asset_path("Vector (9.2).png") %>">
+      <p class="dashboard-list-1-p">Profile</p>
+    </div>
+  </a>
+  <% if current_member.has_role? :admin %>
+  <a class="dashboard-list-1" href="manageuser">
+    <div class="dashboard-list-1-div">
+      <img class="dashboard-list-1-img"src="<%= asset_path("manage user logo.png") %>">
+      <p class="dashboard-list-1-p">Manage User</p>
+    </div>
+  </a>
+
+    <a class="dashboard-list-1" href="/reports">
+      <div class="dashboard-list-1-div">
+        <img class="dashboard-list-1-img"src="<%= asset_path("carbon_report.png") %>">
+        <p class="dashboard-list-1-p">Reports</p>
+      </div>
+    </a>
+<% else %>
+
+    <%end %>
+  <a class="dashboard-list-1" href="/logout">
+    <div class="dashboard-list-1-div">
+      <img class="dashboard-list-1-img"   src="<%= asset_path("Vector (9.3).png") %>">
+      <p class="dashboard-list-1-p">Log Out</p>
+    </div>
+  </a>
+
+
+</div>
+
+

@@ -1,0 +1,13 @@
+<% if current_member.has_role? :admin %>
+  <%= render "members/userlayout" %>
+  <%= render "forms/admin", subject: @subject %>
+<% else %>
+  <%= render "forms/user", subject: @subject %>
+<%end %>
+
+
+
+
+
+
+

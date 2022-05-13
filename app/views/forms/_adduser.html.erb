@@ -1,0 +1,111 @@
+
+
+
+
+
+
+  <div class="head-div2">
+    <div class="head-div2-top-div">
+      <div class="head-div2-top-divs">
+        <a class="head-div2-top-divs-a">User Management</a>
+      </div>
+
+
+      <div class="head-div2-top-divs">
+        <div class="head-div2-top-divs-sub-div">
+          <img src="<%= asset_path("Rectangle 14.png") %>">
+          <div class="head-div2-top-divs-sub-div2">
+            <a class="head-div2-top-divs-sub-div2-a1">
+              <%= current_member.first_name.capitalize%>
+              <%= current_member.last_name.capitalize%>
+            </a>
+            <a class="head-div2-top-divs-sub-div2-a2">
+              <%= current_member.roles.pluck(:name) %>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="head-div3-add-user">
+      <div class="head-div3-sub-div">
+        <div class="head-div3-sub-divs">
+          <p class="head-div3-sub-divs-p">Add Users</p>
+        </div>
+
+      </div>
+      <%= form_with url: "/members/create_member", method: :post do |f| %>
+        <div class="head-div3-1" >
+          <%= f.text_field :first_name, class: "head-div3-1-input head-div3-1-input1-1", placeholder: "Add Name"%>
+          <%= f.text_field :last_name, class: "head-div3-1-input head-div3-1-input1-2", placeholder: "Last Name" %>
+          <%= f.telephone_field :phone_number, class: "head-div3-1-input head-div3-1-input1-3" , placeholder: "Mobile"%>
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "head-div3-1-input head-div3-1-input1-2" , placeholder: "Email"%>
+
+
+
+          <%= f.password_field :password, autocomplete: "new-password", class: "head-div3-1-input head-div3-1-input1-3", placeholder: "password" %>
+          <%# if @minimum_password_length %>
+          <!--          <em>(<%#= @minimum_password_length %> characters minimum)</em>-->
+          <!--        <%# end %><br />-->
+
+          <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "head-div3-1-input head-div3-1-input1-2", placeholder: "confirmpassword" %><br>
+<!-          Role: <%# Role.all.each do |role| %>-->
+            <%#= check_box_tag "roles", role.name, @member.role_ids.include?(role.id) %>
+<!--            <%#= role.name %><br>-->
+
+
+
+          <%# f.input :roles, :as => :select, :collection => Role.all %>
+
+
+
+
+
+          <%=f.submit "Sign up", class: "user-add-btn" %>
+
+      <p class="head-div3-1-p">Assign Role</p>
+      <div class="head-div3-2">
+
+        <%= f.radio_button :roles, "admin" ,type: :radio,class: 'radio' %>
+        <label class="role-1 roles " placeholder="Role 1">Admin</label>
+
+
+        <%= f.radio_button :roles, "Use",type: "radio",class: 'radio' %>
+        <label class="role-2 roles " placeholder="Role 1">User</label>
+          <!--        <input  type="text"  >-->
+<!--        <input class="role-2 roles " type="text" placeholder="Role 2">-->
+<!--        <input class="role-2 roles "type="text" placeholder="Role 3">-->
+<!--        <input class="role-2 roles" type="text" placeholder="Role 4">-->
+
+      </div>
+      <!--        <div>-->
+      <!--          <button class="user-add-btn">Create User</button>-->
+      <!--        </div>-->
+      </div>
+          <%# end %>
+      <%end %>
+      <%= render "devise/shared/error_messages", resource: resource %>
+
+<!-- <h3> import User</h3>-->
+      <%#= form_tag import_members_path, multipart: true do %>
+        <%#= file_field_tag :file %>
+        <%#= submit_tag "upload file" %>
+        <%#end %>
+
+
+      <div>
+        <% if notice %>
+          <p class="notice" style="color: lawngreen;"><%= notice %></p>
+        <% elsif alert %>
+          <p class="alert" style="color: orangered;"><%= alert %></p>
+        <% end %>
+      </div>
+
+
+    </div>
+  </div>
+
+
+</div>
+
+

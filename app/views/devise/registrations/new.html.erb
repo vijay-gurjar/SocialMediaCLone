@@ -1,0 +1,96 @@
+<body class="home-page-body">
+<div class="signup-div">
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+    <%= render "devise/shared/error_messages", resource: resource %>
+    <div class="signup-nav-div">
+      <a href="/home"><img class="signup-nav-img" src="<%= asset_path('Frame 39.png') %>"></a>
+      <a class="signup-nav-img-a1" href="/home">Maze</a>
+    </div>
+
+
+    <div class="signup-div1">
+      <div class="signup-div1-sub-div" >
+        <div class="signup-div1-sub-div1" >
+          <h2 class="signup-div1-h2">Create account</h2>
+          <p class="signup-div1-p">For business, band or celebrity.</p>
+        </div>
+        <div class="signup-div2">
+          <div>
+            <div >
+                            <div class="signup-div2-sub-div">
+                              <p class="signup-div2-sub-div-p">First name</p>
+                            </div>
+              <%= f.text_field :first_name, class: "signup-div2-ipt"%>
+              <div class="signup-div2-sub-div">
+                <div class="field">
+                  <%= f.label :email,class: "signup-div2-sub-div-p" %><br />
+                </div>
+              </div>
+              <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "signup-div2-ipt"%>
+
+              <div class="signup-div2-sub-div">
+                <%= f.label :password, class: "signup-div2-sub-div-p" %>
+
+              </div>
+              <%#= f.label :password %>
+              <%# if @minimum_password_length %>
+<!--                            <em>(<%#= @minimum_password_length %> characters minimum)</em>-->
+<!--                          <%# end %><br />-->
+              <%= f.password_field :password, autocomplete: "new-password", class: "signup-div2-ipt" %>
+
+
+            </div>
+          </div>
+          <div class="new-div">
+                        <div>
+                          <p class="signup-div2-sub-div-p2">Last name</p>
+                        </div>
+            <%= f.text_field :last_name, class: "signup-div2-ipt2"%>
+                        <div>
+                          <p class="signup-div2-sub-div-p2">Phone number</p>
+                        </div>
+            <%= f.telephone_field :phone_number, class: "signup-div2-ipt2" %>
+            <div>
+              <%= f.label :password_confirmation, class:"signup-div2-sub-div-p2 for-adjust" %>
+            </div>
+            <%#= f.password_field :password_confirmation, %>
+            <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "signup-div2-ipt2" %>
+          </div>
+        </div>
+
+        <!--  <div class="field">-->
+
+        <%# if @minimum_password_length %>
+        <!--    <em>(<%#= @minimum_password_length %> characters minimum)</em>-->
+        <!--    <%# end %><br />-->
+        <div class="signup-div3">
+          <input class="signup-div3-ipt" type="checkbox">
+          <p class="signup-div3-p">Remember me</p>
+        </div>
+        <div class="signup-div3">
+          <input class="signup-div3-ipt1" type="checkbox">
+          <p class="signup-div3-p1">I agree to all the <a href="#">Terms</a> and <a href="#">Privacy policy </a> </p>
+        </div>
+        <div class="signup-div4">
+          <%=f.submit "Sign up", class: "signup-div4-btn" %>
+
+          <p class="signup-div3-p1">Already have an account? <a href="/members/sign_in">Log In</a></a> </p>
+        </div>
+
+
+      </div>
+    </div>
+    </div>
+    <!--  </div>-->
+
+    <!--  <div class="field">-->
+    <!--    <br />-->
+
+    <!--  </div>-->
+
+    <!--  <div class="actions">-->
+
+    <!--  </div>-->
+  <% end %>
+
+  <%= render "devise/shared/links" %>

@@ -1,0 +1,20 @@
+
+<% if current_member.has_role? :admin %>
+  <div class="main-divs2">
+
+<% else %>
+  <div class="mains-divs">
+
+<%end %>
+
+
+
+  <%= form_with model: @subject do |form| %>
+
+</div></a>
+  <%end %>
+
+<%= render "form", subject: @subject %>
+
+<br>
+</div>

@@ -1,0 +1,38 @@
+<%= form_with url: "/post/created", method: :post do |form| %>
+
+
+    <%= form.text_field :title,value: current_member.first_name+current_member.last_name  , type: :hidden %>
+    <%= form.text_field :member_id, id: :subject_member_id, value: current_member.id, type: :hidden %>
+    <%= form.text_field :first_name ,value: current_member.first_name , type: :hidden %>
+  <%= form.text_field :last_name ,value: current_member.first_name , type: :hidden %>
+
+        <div>
+          <div class="fst-post-ipt-div">
+            <img class="h6-img" src="<%= asset_path("vector.png") %>">
+            <%= form.text_area :body, class: "fst-post-input", placeholder: "Whats happening ?" %>
+<!--            <input class="fst-post-input" type="text" placeholder="Whats happening ? ">-->
+            <div class="upload-div">
+            <a class="upload-item" href=""> <img src="" alt=""><img class="upload-item-img"
+                                                                    src="<%= asset_path("Vector (3).png") %>"> Live Video </a>
+
+            <a class="upload-item" href=""><img src="" alt=""><img class="upload-item-img" src="<%= asset_path("Vector (4).png") %>"> Photo/Video</a>
+            <a class="upload-item" href=""><img src="" alt=""><img class="upload-item-img" src="<%= asset_path("Vector (5).png") %>">Feeling</a>
+
+
+          </div>
+            <div class="post-privacy">
+            <%= form.label :status %><br>
+            <%= form.select :status, ['public', 'private', 'archived'], selected: 'public' %>
+            </div>
+          </div>
+
+
+
+            <%= form.submit "Post", class: "upload-item-btn2"%>
+
+        </div>
+
+
+<% end %>
+
+

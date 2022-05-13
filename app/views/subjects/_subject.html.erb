@@ -1,0 +1,118 @@
+<% render 'userlayout' %>
+<%subject=@subject %>
+
+
+<% if current_member.has_role? :admin %>
+<div class="main-div">
+
+  <% else %>
+    <div class="main-div2">
+
+  <%end %>
+
+
+
+  <div class="posts-div">
+
+    <div class="post-title">
+      <div class="post-heading showing-title">
+        <a class="h-6" href="<%= subject.id%>"><img alt class="" src="<%= asset_path("vector.png") %>"><p>
+          <%= subject.title %>
+        </p>
+        </a>
+      </div>
+      <div class="post-heading">
+                                    <span class="span-edit">
+                                        <% if current_member.id==subject.member_id %>
+                                            <div class="dropdown">
+                                                <button class="dropbtn">...
+                                                    <i class="fa fa-caret-down"></i>
+                                                </button>
+                                                <div class="dropdown-content">
+
+                                                    <a href="/subjects/<%= @subject.id %>/edit">edit</a>
+                                                  <%= link_to "Delete" , subject_path(@subject), data: { turbo_method:
+                                                                                                           :delete, turbo_confirm: "Are you sure?" } %>
+                                                  <a href="/subjects/<%= @subject.id %>">comments</a>
+                                                </div>
+                                            </div>
+                                            <%end %>
+                                    </span>
+        <div class="post-time-div">
+          <%= time_ago_in_words(subject.created_at)%>
+
+          <%= subject.status %>
+        </div>
+      </div>
+    </div>
+    <div class="post-body">
+      <p class="post-body-p">
+        <%= @subject.body %>
+      </p>
+
+    </div>
+    <div class="like-comment-counts">
+      <p class="like-counts counts">
+                                    <span>
+                                        <%= @subject.likes.count %>
+                                    </span> Likes
+      </p>
+      <p class="like-cmnt-dot">.</p>
+      <p class="comment-counts counts">
+                                    <span>
+                                        <%= @subject.comments.count %>
+                                    </span> Comments
+      </p>
+
+    </div>
+
+    <hr class="hr-for-comment">
+    <div class="for-like-comment">
+      <div class="for-like">
+        <!--          <img src="" alt="like">-->
+        <p><button class="like-btn"><img alt src="<%= asset_path("Vector (6).png")
+        %>"></button>
+
+          <span class="like-logo">
+                                            <%= button_to "like" , likes_path, params: {like: {subject_id: subject.id}},
+                                                          method: :post, class: "like-btn1" %>
+                                        </span>
+        </p>
+      </div>
+      <div class="for-comment">
+
+
+        <p><img src="<%= asset_path("Vector (7).png") %>"><span
+          class="like-logo">Comment</span></p>
+      </div>
+    </div>
+    <hr class="hr-for-comment">
+    <div class="new-comment">
+      <div class="img-cmnt-btn1">
+        <%= form_with model: [ @subject, @subject.comments.build ] do |form| %>
+          <% if current_member %>
+            <%= form.text_field :commenter, id: :subject_member_id, value:
+              current_member.first_name, type: :hidden %>
+          <% else %>
+            <%= form.text_field :commenter, id: :subject_member_id, type:
+              :hidden %>
+          <%end %>
+          <input class="put-comment" alt="comment" src="" type="text"
+                 placeholder="Write a comment" <%=form.text_area :body %>
+          </div>
+          <div class="upload-item-btn1">
+            <%= form.submit value="post" %>
+          </div>
+          </div>
+              <% end %>
+                     <div class="comments-showing-div">
+                           <h2>Comments</h2>
+
+                           <%= render 'comments/comments' %>
+                     </div>
+        </div>
+
+</div>
+
+
+</div>

@@ -1,0 +1,39 @@
+
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+    <%= render "devise/shared/error_messages", resource: resource %>
+
+              <%= f.text_field :first_name, class: "signup-div2-ipt"%>
+
+                  <%= f.label :email,class: "signup-div2-sub-div-p" %><br />
+
+              <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "signup-div2-ipt"%>
+
+
+                <%= f.label :password, class: "signup-div2-sub-div-p" %>
+
+              </div>
+              <%#= f.label :password %>
+              <%# if @minimum_password_length %>
+<!--                            <em>(<%#= @minimum_password_length %> characters minimum)</em>-->
+<!--                          <%# end %><br />-->
+              <%= f.password_field :password, autocomplete: "new-password", class: "signup-div2-ipt" %>
+
+
+
+            <%= f.text_field :last_name, class: "signup-div2-ipt2"%>
+
+            <%= f.telephone_field :phone_number, class: "signup-div2-ipt2" %>
+
+              <%= f.label :password_confirmation, class:"signup-div2-sub-div-p2 for-adjust" %>
+
+            <%#= f.password_field :password_confirmation, %>
+            <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "signup-div2-ipt2" %>
+
+
+
+          <%=f.submit "Sign up", class: "signup-div4-btn" %>
+
+
+  <% end %>
+
+  <%= render "devise/shared/links" %>

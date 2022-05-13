@@ -1,0 +1,100 @@
+<% @members = Member.all %>
+
+  <div class="head-div2">
+    <div class="head-div2-top-div">
+      <div class="head-div2-top-divs">
+        <a class="head-div2-top-divs-a">User Management</a>
+      </div>
+
+
+      <div class="head-div2-top-divs">
+        <div class="head-div2-top-divs-sub-div" >
+          <img src="<%= asset_path("Rectangle 14.png") %>">
+          <div class="head-div2-top-divs-sub-div2" >
+            <a class="head-div2-top-divs-sub-div2-a1">
+              <%= current_member.first_name.capitalize%>
+              <%= current_member.last_name.capitalize%>
+            </a>
+            <a class="head-div2-top-divs-sub-div2-a2">
+              <%= current_member.roles.pluck(:name) %>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="head-div3">
+      <div class="head-div3-sub-div">
+        <div class="head-div3-sub-divs">
+          <p class="head-div3-sub-divs-p">List of Users</p>
+
+        </div>
+        <div class="head-div3-sub-divs head-div3-sub-divs1 "><a href="import/file">
+
+          <button ><img src="<%= asset_path("upload-logo.png") %>"><p>Upload Users</p> </button></a>
+        </div>
+        <div class="head-div3-sub-divs"><a href="/add/users">
+          <button ><img src="<%= asset_path("Vector (9)11.png") %>"><p>Create User</p> </button></a>
+        </div>
+
+      </div>
+
+
+
+      <div class="users-details">
+          <% @members.each do |m| %>
+
+          <div class="user-act-details">
+            <div class="members-div-1-mng-usr">
+              <img class="members-div-logo" src="<%= asset_path("Vector (9)12.png") %>">
+            </div>
+            <% if m.access_locked? %>
+              <div class="act-dact-light-red"></div>
+            <% else %>
+              <div class="act-dact-light-green"></div>
+            <%end %>
+
+
+            <p class="user-act-details-p-name"><%=m.first_name %> <%=m.last_name %></p>
+            <p class="user-act-details-p-number"><%=m.phone_number %></p>
+            <p class="user-act-details-p-email"><%=m.email %></p>
+
+            <!--          for Account deactivate-->
+            <% if m.access_locked? %>
+              <div class="act-dct-status-red-green">
+                <%= link_to 'Activate', deactivate_member_path(m), method: :patch, class: "user-act-details-p-status-green" %>
+              </div>
+              <p><img class="user-details-hover" src="<%= asset_path("Group 16.png") %>"></p>
+            <%else %>
+              <div class="act-dct-status-red">
+                <%= link_to 'Deactivate', deactivate_member_path(m), method: :patch, class: "user-act-details-p-status-red" %>
+              </div>
+              <p><img class="user-details-hover" src="<%= asset_path("Group 16.png") %>"></p>
+            <%end %>
+          </div>
+
+
+
+        <% end %>
+
+
+
+
+
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+</div>

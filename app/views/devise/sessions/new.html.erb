@@ -1,0 +1,59 @@
+<body class="home-page-body">
+
+<div class="signup-div">
+
+  <div class="signup-nav-div">
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+    <a href="/home"><img class="signup-nav-img"  src="<%= asset_path('Frame 39.png') %>"></a>
+    <a class="signup-nav-img-a" href="/home">Maze</a>
+  </div>
+
+
+  <div class="signup-div1-1">
+    <div class="signup-div1-sub-div" >
+      <div class="signup-div1-sub-div1-1">
+        <h2 class="signup-div1-h2">Login</h2>
+
+      </div>
+      <div class="signup-div2">
+        <div>
+          <div class="signup-div2-sub-div-1">
+            <p class="signup-div2-sub-div-p">Email </p>
+          </div>
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "signup-div2-ipt-1" %>
+          <div class="signup-div2-sub-div-1">
+            <p class="signup-div2-sub-div-p">Password</p>
+          </div>
+          <%= f.password_field :password, autocomplete: "current-password", class: "signup-div2-ipt-1" %>
+        </div>
+
+          <div class="field">
+
+
+          </div>
+
+      </div>
+      <div class="signup-div3-1">
+        <% if devise_mapping.rememberable? %>
+        <%= f.check_box :remember_me, class: "signup-div3-ipt" %>
+
+        <%= f.label :remember_me, class: "signup-div3-p" %>
+          <% end %>
+
+          </div>
+
+      <div class="signup-div4-1">
+        <%= f.submit "Log in", class: "signup-div4-btn" %>
+
+        <p class="signup-div3-p1">Don’t have an account? <a href="/members/sign_up">Sign up</a></a> </p>
+      </div>
+
+    </div>
+  </div>
+</div>
+</body>
+</html>
+
+<% end %>
+
+

@@ -1,0 +1,47 @@
+<%#if comment.present? %>
+<%# unless comment.archived? %>
+
+<div>
+<% @subject.comments.each do |comment| %>
+    <hr>
+        <div class="user-name-logo">
+                  <img class="user-logo" alt="user-logo" src="<%= asset_path("Vector (9)12.png") %>">
+                  <p class="comment-user-name"><%= comment.commenter%></p>
+        </div>
+    <span class="span-edit">
+                            <div class="dropdown">
+                                <button class="dropbtn">...
+
+                                </button>
+                                <div class="dropdown-content">
+                                  <%#= link_to("edit", edit_subject_comment_path(comment.id)) %>
+                                                                      <a href="/subjects/<%= @subject.id %>/comments/:id/edit">edit</a>
+                                  <%= link_to "Delete", [comment.subject, comment], data: {
+                                    turbo_method: :delete,
+                                    turbo_confirm: "Are you sure?"
+                                  } %>   <a href="/subjects/<%#@subject.id%>/comments/<%# comment.id%>"></a>-->
+<!--                                  <a href="/subjects/<%#= subject.id %>">comments</a>-->
+                                </div>
+
+                            </div>
+                        </span>
+       <div class="comment-like">
+            <p><button class="comment-like-btn"><img  src="<%= asset_path("Vector (6).png") %>"></button></p>
+            <h6><%= (comment.created_at)%></h6>
+      </div>
+
+    <div class="comment-body-div">
+      <p class="comment-body"><%= comment.body%></p>
+    </div>
+  <%end %>
+
+</div>
+
+
+
+
+
+
+
+
+

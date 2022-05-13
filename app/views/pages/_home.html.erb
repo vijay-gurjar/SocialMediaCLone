@@ -1,0 +1,31 @@
+<body class="home-page-body">
+
+<div class="home-page-div signup-div">
+  <div class="home-page-nav-div">
+    <img class="hp-nav-img" src="<%= asset_path('Frame 39.png') %>">
+    <% if member_signed_in? %>
+      <li>
+        <%= link_to 'sign out', destroy_member_session_path, method: 'delete'%>
+      </li>
+    <% else %>
+      <a class="nav-img-a"  >Maze</a>
+    <%end %>
+
+  </div>
+
+  <p class="home-page-para">
+    Social media shared today,<br>
+    tomorrow or by location
+  </p>
+  <h6 class="home-page-h6">Discover with Maze</h6>
+
+  <div class="home-page-div1"><button class="home-page-div1-btn">
+    <%= link_to "Create Account", new_member_registration_path, class: "home-page-div1-btn"%></button>
+    <h6 class="home-page-div1-h6">or</h6>
+    <button class="home-page-div1-btn1"><%= link_to "Login Account", member_session_path, class: "home-page-div1-btn1"%></button>
+  </div>
+
+</div>
+
+</body>
+</html>

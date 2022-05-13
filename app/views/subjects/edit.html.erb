@@ -1,0 +1,121 @@
+<%= render '/subjects/userlayout' %>
+
+
+<div class="mains-divs">
+
+
+      <%#= f.text_field :title %>
+
+
+
+
+
+
+
+</div>
+
+<%subject=@subject %>
+
+
+<% if current_member.has_role? :admin %>
+  <div class="main-div">
+
+<% else %>
+  <div class="main-div2">
+
+<%end %>
+
+
+<%= form_for(@subject, :url => subject_path(@subject), method: :patch) do |f|  %>
+
+<div class="posts-div">
+
+  <div class="post-title">
+    <div class="post-heading showing-title">
+      <a class="h-6" href="<%= subject.id%>"><img alt class="" src="<%= asset_path("vector.png") %>"><p>
+        <%= subject.title %>
+      </p>
+      </a>
+    </div>
+    <div class="post-heading">
+                                    <span class="span-edit">
+                                        <% if current_member.id==subject.member_id %>
+                                            <div class="dropdown">
+                                                <button class="dropbtn">...
+                                                    <i class="fa fa-caret-down"></i>
+                                                </button>
+                                                <div class="dropdown-content">
+
+                                                    <a href="/subjects/<%= @subject.id %>/edit">edit</a>
+                                                  <%= link_to "Delete" , subject_path(@subject), data: { turbo_method:
+                                                                                                           :delete, turbo_confirm: "Are you sure?" } %>
+                                                  <a href="/subjects/<%= @subject.id %>">comments</a>
+                                                </div>
+                                            </div>
+                                            <%end %>
+                                    </span>
+      <div class="post-time-div">
+        <%= time_ago_in_words(subject.created_at)%>
+
+        <%= subject.status %>
+      </div>
+    </div>
+  </div>
+  <div class="post-body">
+    <p class="post-body-p">
+      <%= f.text_field :body %>
+    </p>
+
+  </div>
+  <div class="like-comment-counts">
+    <p class="like-counts counts">
+                                    <span>
+                                        <%= @subject.likes.count %>
+                                    </span> Likes
+    </p>
+    <p class="like-cmnt-dot">.</p>
+    <p class="comment-counts counts">
+                                    <span>
+                                        <%= @subject.comments.count %>
+                                    </span> Comments
+    </p>
+
+  </div>
+
+  <hr class="hr-for-comment">
+  <div class="for-like-comment">
+    <div class="for-like">
+      <!--          <img src="" alt="like">-->
+      <p><button class="like-btn"><img alt src="<%= asset_path("Vector (6).png")
+      %>"></button>
+
+        <span class="like-logo">
+                                            <%= button_to "like" , likes_path, params: {like: {subject_id: subject.id}},
+                                                          method: :post, class: "like-btn1" %>
+                                        </span>
+      </p>
+    </div>
+    <div class="for-comment">
+
+
+      <p><img src="<%= asset_path("Vector (7).png") %>"><span
+        class="like-logo">Comment</span></p>
+    </div>
+  </div>
+  <hr class="hr-for-comment">
+  <div class="new-comment">
+
+
+          <%= f.submit "Post", class: "upload-item-btn2" %>
+        </div>
+        </div>
+
+
+      </div>
+
+</div>
+
+
+</div>
+
+  <%end %>
